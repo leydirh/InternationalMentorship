@@ -2,12 +2,13 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Check, BookOpen, MessageSquare, Lightbulb, Calendar, X, Sparkles } from "lucide-react";
+import { ArrowRight, Check, BookOpen, MessageSquare, Lightbulb, Calendar, X, Sparkles, AlertTriangle } from "lucide-react";
 import { usePlatform } from "@/context/PlatformContext";
 
 export default function HomePage() {
   const { addBooking } = usePlatform();
   const [quickBookOpen, setQuickBookOpen] = useState(false);
+  const [asyncNotAvailableModalOpen, setAsyncNotAvailableModalOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState("Debate & Pitching");
   const [studentName, setStudentName] = useState("");
   const [studentEmail, setStudentEmail] = useState("");
@@ -50,21 +51,28 @@ export default function HomePage() {
         <div className="w-full h-px bg-slate-200 my-8" />
       </section>
 
-      {/* 2. Top Banner (About Us Section) */}
+      {/* 2. Top Banner (Requirement 1: LARGER ABOUT US SIGN & Black Overlay) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <div className="relative rounded-3xl overflow-hidden bg-black text-white p-8 sm:p-16 shadow-2xl min-h-[460px] flex flex-col justify-end border border-slate-800">
+        <div className="relative rounded-3xl overflow-hidden bg-black text-white p-8 sm:p-16 shadow-2xl min-h-[480px] flex flex-col justify-end border border-slate-800">
+          
+          <!-- Background image: Homepage_Intro.png -->
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: `url('/assets/Homepage_Intro.png')`,
             }}
           />
+          
+          <!-- Solid Black Overlay -->
           <div className="absolute inset-0 bg-black/65 backdrop-blur-[2px]" />
 
-          <div className="relative z-10 max-w-5xl">
-            <div className="inline-block px-4 py-1.5 rounded-xl border border-white/30 bg-white/10 backdrop-blur-md text-sm font-light text-white mb-6 shadow-sm">
+          <div className="relative z-10 max-w-5xl space-y-6">
+            
+            {/* LARGER ABOUT US SIGN */}
+            <div className="inline-block px-7 py-2.5 rounded-2xl border-2 border-white/50 bg-white/20 backdrop-blur-md text-base sm:text-lg font-semibold tracking-wider text-white shadow-lg uppercase">
               About Us
             </div>
+
             <p className="text-xl sm:text-3xl font-light leading-relaxed text-slate-100 tracking-wide">
               The criteria for university admission moves beyond grades to showcase practical competence such as debating skills, building applications, launching startups, and pitching. Our organization addresses this challenge with a free, self-paced library of courses tailored to competitions, coupled with affordable real-time mentoring by verified near-peer winners of competitions.
             </p>
@@ -72,10 +80,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. Feature Callout Cards (With Exact Matching Shape Placement & White Frames) */}
+      {/* 3. Feature Callout Cards (Requirement 2: SWAPPED PICTURES) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 space-y-6">
         
-        {/* Yellow Card (Top): Yellow Torus Ring on Right side in white box */}
+        {/* Yellow Card (Top): Contains Pink/Purple Steps (Homepage_Purple.png) on the Right side */}
         <div className="relative rounded-3xl bg-[#FEF08A] text-slate-900 p-8 sm:p-12 overflow-hidden border border-amber-200/60 shadow-sm transition-transform hover:-translate-y-1 duration-300">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             <div className="md:col-span-2">
@@ -86,8 +94,8 @@ export default function HomePage() {
             <div className="flex justify-end items-center">
               <div className="bg-white p-3 rounded-2xl border border-white/80 shadow-md flex items-center justify-center">
                 <img
-                  src="/assets/Homepage_Yellow.png"
-                  alt="Yellow Torus Shape"
+                  src="/assets/Homepage_Purple.png"
+                  alt="Purple Steps Graphic"
                   className="w-40 sm:w-44 h-auto object-contain rounded-xl"
                 />
               </div>
@@ -95,14 +103,14 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Purple Card (Bottom): Pink/Purple Steps on Left side in white box */}
+        {/* Purple Card (Bottom): Contains Yellow Torus Ring (Homepage_Yellow.png) on the Left side */}
         <div className="relative rounded-3xl bg-[#DDD6FE] text-slate-900 p-8 sm:p-12 overflow-hidden border border-purple-200/60 shadow-sm transition-transform hover:-translate-y-1 duration-300">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             <div className="flex justify-start items-center order-2 md:order-1">
               <div className="bg-white p-3 rounded-2xl border border-white/80 shadow-md flex items-center justify-center">
                 <img
-                  src="/assets/Homepage_Purple.png"
-                  alt="Purple Steps Shape"
+                  src="/assets/Homepage_Yellow.png"
+                  alt="Yellow Torus Shape"
                   className="w-36 sm:w-40 h-auto object-contain rounded-xl"
                 />
               </div>
@@ -202,9 +210,15 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
           
+          {/* Card 1: Asynchronous Learning (Requirement 4: Currently Not Available Notice Trigger) */}
           <div className="rounded-3xl border border-slate-200 bg-white p-10 sm:p-12 flex flex-col justify-between hover:shadow-xl transition-all duration-300 group">
             <div className="space-y-6">
-              <h3 className="text-2xl font-normal text-slate-900">Asynchronous Learning</h3>
+              <div className="flex items-center justify-between">
+                <h3 className="text-2xl font-normal text-slate-900">Asynchronous Learning</h3>
+                <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-medium border border-amber-300 flex items-center gap-1">
+                  <AlertTriangle className="w-3.5 h-3.5 text-amber-700" /> Coming Soon
+                </span>
+              </div>
               <div className="text-5xl font-light text-slate-900 tracking-tight">$0</div>
               
               <ul className="space-y-4 text-base font-extralight text-slate-600 pt-2">
@@ -224,15 +238,16 @@ export default function HomePage() {
             </div>
 
             <div className="pt-12">
-              <Link
-                href="/courses"
+              <button
+                onClick={() => setAsyncNotAvailableModalOpen(true)}
                 className="w-full block text-center py-4 px-6 rounded-full bg-slate-900 text-white font-normal text-base hover:bg-brand-purple-900 transition-colors shadow-md"
               >
                 Explore
-              </Link>
+              </button>
             </div>
           </div>
 
+          {/* Card 2: Lessons */}
           <div className="rounded-3xl border border-slate-200 bg-white p-10 sm:p-12 flex flex-col justify-between hover:shadow-xl transition-all duration-300 group relative">
             <div className="absolute top-8 right-8">
               <span className="px-3.5 py-1.5 rounded-full bg-brand-yellow-100 text-slate-900 text-xs font-normal border border-brand-yellow-300">
@@ -265,13 +280,14 @@ export default function HomePage() {
                 href="/mentors"
                 className="w-full block text-center py-4 px-6 rounded-full bg-slate-900 text-white font-normal text-base hover:bg-brand-purple-900 transition-colors shadow-md"
               >
-                Explore
+                Explore Tutors
               </Link>
             </div>
           </div>
 
         </div>
 
+        {/* Free Consultation Direct Banner */}
         <div className="mt-14 p-10 rounded-3xl bg-gradient-to-r from-slate-900 via-brand-purple-950 to-slate-900 text-white flex flex-col sm:flex-row items-center justify-between gap-6 text-left shadow-lg">
           <div>
             <h3 className="text-2xl font-light text-white mb-1">
@@ -289,6 +305,47 @@ export default function HomePage() {
           </button>
         </div>
       </section>
+
+      {/* REQUIREMENT 4: ASYNC COURSES NOT AVAILABLE MODAL */}
+      {asyncNotAvailableModalOpen && (
+        <div className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-md w-full p-8 text-center space-y-6 shadow-2xl border border-slate-100 relative">
+            <button
+              onClick={() => setAsyncNotAvailableModalOpen(false)}
+              className="absolute top-6 right-6 text-slate-400 hover:text-slate-600"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="w-16 h-16 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mx-auto">
+              <AlertTriangle className="w-8 h-8" />
+            </div>
+
+            <div className="space-y-2">
+              <h3 className="text-xl font-semibold text-slate-900">Currently Not Available</h3>
+              <p className="text-xs font-extralight text-slate-600 leading-relaxed">
+                Our asynchronous self-paced course library is currently under construction and content verification. Please check back soon or book a 1-on-1 mentor session directly!
+              </p>
+            </div>
+
+            <div className="pt-2 space-y-2">
+              <Link
+                href="/mentors"
+                onClick={() => setAsyncNotAvailableModalOpen(false)}
+                className="w-full block py-3 rounded-full bg-slate-900 text-white text-xs font-normal hover:bg-brand-purple-900 transition-colors"
+              >
+                Explore 1-on-1 Peer Tutors
+              </Link>
+              <button
+                onClick={() => setAsyncNotAvailableModalOpen(false)}
+                className="w-full py-2.5 rounded-full border border-slate-200 text-slate-600 text-xs font-normal"
+              >
+                Close Notice
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Quick Booking Modal */}
       {quickBookOpen && (
