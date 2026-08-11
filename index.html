@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>International Mentorship | Peer to Peer Online Education Platform</title>
+  <meta name="description" content="Free asynchronous competition courses, peer consult booking, and 1-on-1 mentor sessions." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              yellow: { 100: '#fef9c3', 200: '#fef08a', 300: '#fde047', 400: '#eab308' },
+              purple: { 100: '#f3e8ff', 200: '#ddd6fe', 300: '#c084fc', 600: '#9333ea', 700: '#7e22ce', 900: '#581c87', 950: '#3b0764' }
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'Hero', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    body {
+      font-weight: 300;
+      letter-spacing: -0.01em;
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-900 flex flex-col min-h-screen">
+
+  <!-- Header / Navigation Bar -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm" id="nav-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo -->
+        <a href="#home" onclick="showPage('home')" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl border border-slate-100 overflow-hidden bg-white p-1 shadow-sm flex items-center justify-center group-hover:scale-105 transition-transform">
+            <img src="assets/Website_Logo.png" alt="Website Logo" class="w-full h-full object-contain" />
+          </div>
+          <div>
+            <span class="font-semibold text-lg text-slate-900 tracking-tight block leading-tight">
+              International Mentorship
+            </span>
+            <span class="text-[11px] font-normal text-slate-400 block tracking-wide">
+              app.internationalmentorship.net
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-1">
+          <button onclick="showPage('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-full text-sm font-light text-slate-600 hover:text-slate-900 hover:bg-slate-50 flex items-center gap-2">
+            <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i> Home
+          </button>
+          <button onclick="showPage('courses')" id="nav-courses" class="nav-btn px-4 py-2 rounded-full text-sm font-light text-slate-600 hover:text-slate-900 hover:bg-slate-50 flex items-center gap-2">
+            <i data-lucide="graduation-cap" class="w-4 h-4 text-slate-400"></i> Async Courses
+          </button>
+          <button onclick="showPage('mentors')" id="nav-mentors" class="nav-btn px-4 py-2 rounded-full text-sm font-light text-slate-600 hover:text-slate-900 hover:bg-slate-50 flex items-center gap-2">
+            <i data-lucide="calendar" class="w-4 h-4 text-slate-400"></i> Peer Mentors
+          </button>
+          <button onclick="showPage('forum')" id="nav-forum" class="nav-btn px-4 py-2 rounded-full text-sm font-light text-slate-600 hover:text-slate-900 hover:bg-slate-50 flex items-center gap-2">
+            <i data-lucide="message-square" class="w-4 h-4 text-slate-400"></i> Forum & Tips
+          </button>
+          <button onclick="showPage('dashboard')" id="nav-dashboard" class="nav-btn px-4 py-2 rounded-full text-sm font-light text-slate-600 hover:text-slate-900 hover:bg-slate-50 flex items-center gap-2">
+            <i data-lucide="user-check" class="w-4 h-4 text-slate-400"></i> Dashboard
+          </button>
+        </nav>
+
+        <!-- Right Profile & Spacing Section -->
+        <div class="flex items-center gap-6" id="auth-header-actions">
+          <div id="user-profile-badge" class="hidden items-center gap-5">
+            <span id="role-display-badge" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-yellow-200 text-slate-900 border border-yellow-300 shadow-sm shrink-0">
+              <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-purple-700"></i> <span id="role-text-span">Creator / Admin</span>
+            </span>
+
+            <button onclick="openProfileModal()" class="flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full border border-slate-200 hover:border-purple-300 hover:bg-slate-50 transition-all shadow-sm">
+              <img id="user-avatar-img" src="assets/Website_Logo.png" class="w-7 h-7 rounded-full object-cover border border-slate-200 bg-white" />
+              <span id="user-display-name" class="text-xs font-medium text-slate-800 max-w-[150px] truncate">Ray Qin</span>
+            </button>
+
+            <button onclick="handleSignOut()" class="p-2 text-slate-400 hover:text-red-500 rounded-full hover:bg-red-50" title="Sign Out">
+              <i data-lucide="log-out" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div id="auth-login-buttons" class="flex items-center gap-3">
+            <button onclick="showPage('auth')" class="px-4 py-2 text-sm font-light text-slate-700 hover:text-slate-900">
+              Sign In
+            </button>
+            <button onclick="showPage('auth')" class="px-5 py-2.5 rounded-full bg-slate-900 text-white text-sm font-normal hover:bg-purple-900 transition-colors shadow-sm">
+              Get Started
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow">
+    
+    <!-- PAGE 1: HOMEPAGE -->
+    <div id="page-home" class="page-section">
+      
+      <!-- 1. Title Header -->
+      <section class="pt-16 pb-12 text-center max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-100 text-slate-800 text-xs font-normal mb-6 border border-yellow-300">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-600"></i>
+          <span>Extracurricular & Competition Mentorship</span>
+        </div>
+
+        <h1 class="text-5xl sm:text-7xl font-light text-slate-900 tracking-tight leading-tight mb-4">
+          Peer to Peer Mentorship
+        </h1>
+        <p class="text-xl sm:text-2xl font-extralight text-slate-500 mb-8">
+          Providing quality education to all.
+        </p>
+        
+        <div class="w-full h-px bg-slate-200 my-8"></div>
+      </section>
+
+      <!-- 2. Top Banner (About Us Section) -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <div class="relative rounded-3xl overflow-hidden bg-black text-white p-8 sm:p-16 shadow-2xl min-h-[460px] flex flex-col justify-end border border-slate-800">
+          <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/Homepage_Intro.png')"></div>
+          <div class="absolute inset-0 bg-black/65 backdrop-blur-[2px]"></div>
+
+          <div class="relative z-10 max-w-5xl">
+            <div class="inline-block px-4 py-1.5 rounded-xl border border-white/30 bg-white/10 backdrop-blur-md text-sm font-light text-white mb-6 shadow-sm">
+              About Us
+            </div>
+            <p class="text-xl sm:text-3xl font-light leading-relaxed text-slate-100 tracking-wide">
+              The criteria for university admission moves beyond grades to showcase practical competence such as debating skills, building applications, launching startups, and pitching. Our organization addresses this challenge with a free, self-paced library of courses tailored to competitions, coupled with affordable real-time mentoring by verified near-peer winners of competitions.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Feature Callout Cards (With Exact Matching Shape Placement & White Frames) -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 space-y-6">
+        
+        <!-- Yellow Card (Top): Yellow Torus Ring on Right side in white box -->
+        <div class="relative rounded-3xl bg-[#FEF08A] text-slate-900 p-8 sm:p-12 overflow-hidden border border-amber-200/60 shadow-sm">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <div class="md:col-span-2">
+              <p class="text-xl sm:text-2xl font-light leading-relaxed text-slate-900">
+                Existing tutoring centers and platforms focus primarily on traditional academic topics (e.g., AP and IB), leaving a gap for affordable, globally accessible, and comprehensive extracurricular training.
+              </p>
+            </div>
+            <div class="flex justify-end items-center">
+              <div class="bg-white p-3 rounded-2xl border border-white/80 shadow-md flex items-center justify-center">
+                <img src="assets/Homepage_Yellow.png" alt="Yellow Torus Shape" class="w-40 sm:w-44 h-auto object-contain rounded-xl" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Purple Card (Bottom): Pink/Purple Steps on Left side in white box -->
+        <div class="relative rounded-3xl bg-[#DDD6FE] text-slate-900 p-8 sm:p-12 overflow-hidden border border-purple-200/60 shadow-sm">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <div class="flex justify-start items-center order-2 md:order-1">
+              <div class="bg-white p-3 rounded-2xl border border-white/80 shadow-md flex items-center justify-center">
+                <img src="assets/Homepage_Purple.png" alt="Purple Steps Shape" class="w-36 sm:w-40 h-auto object-contain rounded-xl" />
+              </div>
+            </div>
+            <div class="md:col-span-2 order-1 md:order-2">
+              <p class="text-xl sm:text-2xl font-light leading-relaxed text-slate-900">
+                Our platform bridges this gap by offering free, self-paced asynchronous courses taught by award-winning students and teachers to anyone with internet access.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 4. Our Process -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-28">
+        <h2 class="text-4xl font-light text-slate-900 mb-14 text-left">
+          Our Process
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-slate-900 border border-slate-200 bg-slate-50">
+              <i data-lucide="book-open" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-normal text-slate-900">Lessons</h3>
+            <p class="text-base font-extralight text-slate-600 leading-relaxed">
+              Students are able to learn from lessons or book sessions with tutors.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-slate-900 border border-slate-200 bg-slate-50">
+              <i data-lucide="message-square" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-normal text-slate-900">Feedback</h3>
+            <p class="text-base font-extralight text-slate-600 leading-relaxed">
+              Through these lessons, students receive feedback about their work.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-slate-900 border border-slate-200 bg-slate-50">
+              <i data-lucide="lightbulb" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-normal text-slate-900">Experience</h3>
+            <p class="text-base font-extralight text-slate-600 leading-relaxed">
+              Student mentors are able to offer advice and experience, from a familiar perspective of another student.
+            </p>
+          </div>
+        </div>
+
+        <div class="w-full h-px bg-slate-200 mt-20"></div>
+      </section>
+
+      <!-- 5. Quote Callout Section -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-28">
+        <div class="rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-2 bg-slate-950 text-white min-h-[520px]">
+          
+          <div class="p-8 sm:p-16 flex flex-col justify-center space-y-8">
+            <div class="inline-block self-start px-4 py-1.5 rounded-full border border-white/30 text-xs font-extralight text-slate-300">
+              What people are saying
+            </div>
+
+            <blockquote class="text-3xl sm:text-4xl font-light leading-snug tracking-tight text-white">
+              “Those who do not have tuition pay for it by getting poorer grades/future prospects.”
+            </blockquote>
+
+            <div class="space-y-1 text-xs text-slate-400 font-extralight">
+              <p class="text-slate-300 font-normal">– r/ApplyingToCollege</p>
+              <p class="bg-white/10 inline-block px-3.5 py-1 rounded-full border border-white/10 mt-1">
+                Discussion on Private Counselors
+              </p>
+            </div>
+          </div>
+
+          <div class="relative min-h-[350px] md:min-h-full bg-cover bg-center"
+            style="background-image: url('assets/Homepage_Quote.avif')">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 6. Core Offering Pricing Cards -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-28 text-center">
+        <h2 class="text-4xl font-light text-slate-900 mb-3">Our Core Offering</h2>
+        <p class="text-base font-extralight text-slate-500 mb-16">
+          Two Ways to Learn. Zero Barriers to Entry.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
+          
+          <div class="rounded-3xl border border-slate-200 bg-white p-10 sm:p-12 flex flex-col justify-between hover:shadow-xl transition-all">
+            <div class="space-y-6">
+              <h3 class="text-2xl font-normal text-slate-900">Asynchronous Learning</h3>
+              <div class="text-5xl font-light text-slate-900 tracking-tight">$0</div>
+              
+              <ul class="space-y-4 text-base font-extralight text-slate-600 pt-2">
+                <li class="flex items-center gap-3">
+                  <i data-lucide="check" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+                  <span>Courses on different subjects and extracurriculars</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <i data-lucide="check" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+                  <span>Learn at your own pace, anywhere.</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <i data-lucide="check" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+                  <span>Discussion with the community</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="pt-12">
+              <button onclick="showPage('courses')" class="w-full block text-center py-4 px-6 rounded-full bg-slate-900 text-white font-normal text-base hover:bg-purple-900 transition-colors shadow-md">
+                Explore
+              </button>
+            </div>
+          </div>
+
+          <div class="rounded-3xl border border-slate-200 bg-white p-10 sm:p-12 flex flex-col justify-between hover:shadow-xl transition-all relative">
+            <div class="absolute top-8 right-8">
+              <span class="px-3.5 py-1.5 rounded-full bg-yellow-100 text-slate-900 text-xs font-normal border border-yellow-300">
+                1-on-1 Mentorship
+              </span>
+            </div>
+
+            <div class="space-y-6">
+              <h3 class="text-2xl font-normal text-slate-900">Lessons</h3>
+              <div class="text-5xl font-light text-slate-900 tracking-tight">$75/hour</div>
+              
+              <ul class="space-y-4 text-base font-extralight text-slate-600 pt-2">
+                <li class="flex items-center gap-3">
+                  <i data-lucide="check" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+                  <span>Peer to peer lessons</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <i data-lucide="check" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+                  <span>Get personalized feedback</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <i data-lucide="check" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+                  <span>Advice and experience</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="pt-12">
+              <button onclick="showPage('mentors')" class="w-full block text-center py-4 px-6 rounded-full bg-slate-900 text-white font-normal text-base hover:bg-purple-900 transition-colors shadow-md">
+                Explore
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- PAGE 2: COURSES PAGE -->
+    <div id="page-courses" class="page-section hidden py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto space-y-8">
+        <div class="text-center max-w-3xl mx-auto space-y-4">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 text-purple-900 text-xs font-normal border border-purple-200">
+            <i data-lucide="graduation-cap" class="w-3.5 h-3.5 text-purple-700"></i>
+            100% Free Asynchronous Library
+          </div>
+          <h1 class="text-4xl font-light text-slate-900 tracking-tight">Asynchronous Courses</h1>
+          <p class="text-sm font-extralight text-slate-600">Self-paced modules. Click the plus box to publish a new course.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="courses-grid-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3: MENTORS PAGE -->
+    <div id="page-mentors" class="page-section hidden py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto space-y-8">
+        <div class="text-center max-w-3xl mx-auto space-y-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-100 text-slate-900 text-xs font-normal border border-yellow-300">
+            <i data-lucide="award" class="w-3.5 h-3.5 text-purple-700"></i>
+            Peer Mentors & Tutors
+          </div>
+          <h1 class="text-4xl font-light text-slate-900 tracking-tight">Peer Mentors</h1>
+          <p class="text-sm font-extralight text-slate-600">Connect with tutors for direct feedback or register as a mentor.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="mentors-grid-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 4: FORUM PAGE -->
+    <div id="page-forum" class="page-section hidden py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-6xl mx-auto space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+          <div>
+            <h1 class="text-3xl font-light text-slate-900">Community Forum & Tips</h1>
+            <p class="text-xs font-extralight text-slate-500">Ask advice, exchange tips, and discuss strategy with peers.</p>
+          </div>
+        </div>
+
+        <div class="space-y-4" id="forum-posts-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 5: DASHBOARD PAGE -->
+    <div id="page-dashboard" class="page-section hidden py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto space-y-8" id="dashboard-content">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+
+    <!-- PAGE 6: AUTH SIGN IN PAGE -->
+    <div id="page-auth" class="page-section hidden py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-md mx-auto bg-white rounded-3xl border border-slate-200 p-8 space-y-6 shadow-sm">
+        <div class="text-center space-y-2">
+          <h2 class="text-2xl font-light text-slate-900">Sign In to Platform</h2>
+          <p class="text-xs text-slate-500 font-extralight">Access student bookings or creator dashboard</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-yellow-50 border border-yellow-200 text-xs space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="font-semibold text-purple-900">Creator/Admin Account (PRD 4.2)</span>
+            <button onclick="autofillCreator()" class="px-2.5 py-1 bg-slate-900 text-white rounded-full text-[11px]">
+              Autofill Admin
+            </button>
+          </div>
+          <p class="text-[11px] text-slate-600">
+            Email: <code class="font-mono font-medium text-slate-900">rayqin864@gmail.com</code> | Password: <code class="font-mono font-medium text-slate-900">Woshitiancai10</code>
+          </p>
+        </div>
+
+        <form onsubmit="handleAuthLogin(event)" class="space-y-4 text-xs">
+          <div>
+            <label class="block font-medium text-slate-700 mb-1">Email</label>
+            <input type="email" id="auth-email-input" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs" placeholder="rayqin864@gmail.com" />
+          </div>
+
+          <div>
+            <label class="block font-medium text-slate-700 mb-1">Password</label>
+            <input type="password" id="auth-password-input" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs" placeholder="••••••••••••" />
+          </div>
+
+          <button type="submit" class="w-full py-3 rounded-full bg-slate-900 text-white font-normal text-xs hover:bg-purple-900">
+            Sign In
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- PROFILE MODAL -->
+  <div id="profile-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-8 relative shadow-2xl border border-slate-100 space-y-6">
+      <button onclick="closeProfileModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
+        <img id="profile-modal-avatar" src="assets/Website_Logo.png" class="w-14 h-14 rounded-2xl object-cover border border-slate-200 bg-white" />
+        <div>
+          <h3 id="profile-modal-name" class="text-lg font-normal text-slate-900">User Name</h3>
+          <p id="profile-modal-email" class="text-xs text-slate-400 font-extralight">user@example.com</p>
+        </div>
+      </div>
+
+      <form onsubmit="handleSaveProfile(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">Full Name</label>
+          <input type="text" id="edit-profile-name" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs" />
+        </div>
+
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">Headline / Role</label>
+          <input type="text" id="edit-profile-headline" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs" placeholder="Creator & Platform Administrator" />
+        </div>
+
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">Avatar Image URL</label>
+          <input type="text" id="edit-profile-avatar" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 font-mono text-[11px]" />
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-full bg-slate-900 text-white font-normal text-xs hover:bg-purple-900">
+          Save Profile
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 pt-16 pb-12 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs font-extralight">
+      <p>© 2026 International Mentorship (app.internationalmentorship.net). Isolated Deployment on Subdomain.</p>
+    </div>
+  </footer>
+
+  <!-- Application Script -->
+  <script>
+    let currentUser = JSON.parse(localStorage.getItem('im_user')) || null;
+    let customCourses = JSON.parse(localStorage.getItem('im_courses')) || [];
+    let customMentors = JSON.parse(localStorage.getItem('im_all_users')) || [];
+    let forumPosts = JSON.parse(localStorage.getItem('im_forum')) || [];
+
+    function showPage(pageId) {
+      document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden'));
+      document.getElementById('page-' + pageId).classList.remove('hidden');
+
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('bg-slate-900', 'text-white'));
+      const activeNav = document.getElementById('nav-' + pageId);
+      if (activeNav) activeNav.classList.add('bg-slate-900', 'text-white');
+
+      window.scrollTo(0, 0);
+      renderUI();
+    }
+
+    function renderUI() {
+      // Auth Header Render
+      if (currentUser) {
+        document.getElementById('auth-login-buttons').classList.add('hidden');
+        document.getElementById('user-profile-badge').classList.remove('hidden');
+        document.getElementById('user-profile-badge').classList.add('flex');
+        document.getElementById('user-display-name').innerText = currentUser.name;
+        document.getElementById('user-avatar-img').src = currentUser.avatar || 'assets/Website_Logo.png';
+        
+        const roleSpan = document.getElementById('role-text-span');
+        if (currentUser.isAdmin) {
+          roleSpan.innerText = 'Creator / Admin';
+        } else if (currentUser.role === 'teacher') {
+          roleSpan.innerText = 'Teacher / Mentor';
+        } else {
+          roleSpan.innerText = 'Student';
+        }
+      } else {
+        document.getElementById('auth-login-buttons').classList.remove('hidden');
+        document.getElementById('user-profile-badge').classList.add('hidden');
+      }
+
+      // Render Courses Grid
+      const coursesGrid = document.getElementById('courses-grid-container');
+      const plusCourseCard = `
+        <div onclick="createNewCoursePrompt()" class="bg-white rounded-3xl border-2 border-dashed border-slate-300 hover:border-purple-500 p-8 min-h-[300px] flex flex-col items-center justify-center space-y-4 hover:shadow-lg transition-all cursor-pointer text-center">
+          <div class="w-14 h-14 rounded-full bg-purple-50 text-purple-700 flex items-center justify-center">
+            <i data-lucide="plus" class="w-7 h-7"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-normal text-slate-900">Add Async Course</h3>
+            <p class="text-xs text-slate-400 font-extralight mt-1">Publish a self-paced competition course</p>
+          </div>
+        </div>
+      `;
+
+      const courseItems = customCourses.map(c => `
+        <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden flex flex-col justify-between">
+          <img src="${c.thumbnail || 'assets/Homepage_Intro.png'}" class="h-44 w-full object-cover" />
+          <div class="p-6 space-y-3">
+            <span class="px-3 py-1 rounded-full bg-slate-100 text-xs text-slate-700">${c.category}</span>
+            <h3 class="text-lg font-normal text-slate-900">${c.title}</h3>
+            <p class="text-xs text-slate-500 font-extralight">Mentor: ${c.mentorName || 'Peer Tutor'}</p>
+          </div>
+          <div class="p-6 pt-0">
+            <button onclick="alert('Course active!')" class="w-full py-3 rounded-full bg-slate-900 text-white text-xs font-normal">Start Course</button>
+          </div>
+        </div>
+      `).join('');
+
+      coursesGrid.innerHTML = plusCourseCard + courseItems;
+
+      // Render Mentors Grid
+      const mentorsGrid = document.getElementById('mentors-grid-container');
+      const plusMentorCard = `
+        <div onclick="showPage('auth')" class="bg-white rounded-3xl border-2 border-dashed border-slate-300 hover:border-purple-500 p-8 min-h-[280px] flex flex-col items-center justify-center space-y-4 hover:shadow-lg transition-all cursor-pointer text-center">
+          <div class="w-14 h-14 rounded-full bg-yellow-100 text-slate-900 flex items-center justify-center">
+            <i data-lucide="plus" class="w-7 h-7 text-purple-700"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-normal text-slate-900">Register as Peer Mentor</h3>
+            <p class="text-xs text-slate-400 font-extralight mt-1">Submit achievements & verification test</p>
+          </div>
+        </div>
+      `;
+
+      const mentorTeachers = customMentors.filter(u => u.role === 'teacher' || u.isVerifiedTeacher);
+      const mentorItems = mentorTeachers.map(m => `
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 flex flex-col justify-between space-y-4">
+          <div class="flex items-center gap-4">
+            <img src="${m.avatar || 'assets/Website_Logo.png'}" class="w-14 h-14 rounded-2xl object-cover border border-slate-200" />
+            <div>
+              <h3 class="text-base font-normal text-slate-900">${m.name}</h3>
+              <span class="text-xs text-purple-700 font-light block">${m.subject || 'Verified Tutor'}</span>
+            </div>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl text-xs flex justify-between">
+            <span class="text-slate-500">Rate:</span>
+            <span class="font-semibold text-slate-900">$75 / hour</span>
+          </div>
+          <button onclick="alert('Session booked! Confirmation link generated.')" class="w-full py-3 rounded-full bg-slate-900 text-white text-xs font-normal">Book Lesson ($75/hr)</button>
+        </div>
+      `).join('');
+
+      mentorsGrid.innerHTML = plusMentorCard + mentorItems;
+
+      // Render Forum Grid
+      const forumGrid = document.getElementById('forum-posts-container');
+      const plusForumCard = `
+        <div onclick="createNewForumPrompt()" class="bg-white rounded-3xl border-2 border-dashed border-slate-300 hover:border-purple-500 p-6 flex items-center justify-center gap-3 hover:shadow-md transition-all cursor-pointer text-slate-800">
+          <div class="w-10 h-10 rounded-full bg-purple-50 text-purple-700 flex items-center justify-center">
+            <i data-lucide="plus" class="w-6 h-6"></i>
+          </div>
+          <span class="text-sm font-normal">Create New Forum Thread / Post Tip</span>
+        </div>
+      `;
+
+      const forumItems = forumPosts.map(p => `
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 space-y-4">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-3">
+              <img src="${p.authorAvatar || 'assets/Website_Logo.png'}" class="w-8 h-8 rounded-full border border-slate-200 object-cover" />
+              <div>
+                <span class="text-xs font-medium text-slate-900">${p.authorName}</span>
+                <span class="text-[10px] text-slate-400 block">${p.createdAt}</span>
+              </div>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-slate-100 text-xs font-light">#${p.tag}</span>
+          </div>
+          <h3 class="text-base font-normal text-slate-900">${p.title}</h3>
+          <p class="text-xs text-slate-700 font-extralight">${p.content}</p>
+          <div class="pt-2 flex items-center gap-4 text-xs text-slate-500">
+            <button onclick="likePost('${p.id}')" class="hover:text-purple-700 font-normal flex items-center gap-1">
+              <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i> ${p.likes || 0} Likes
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      forumGrid.innerHTML = plusForumCard + forumItems;
+
+      // Dashboard
+      const dash = document.getElementById('dashboard-content');
+      dash.innerHTML = `
+        <div class="p-8 rounded-3xl bg-white border border-slate-200 space-y-4">
+          <div class="flex justify-between items-center">
+            <h2 class="text-2xl font-light text-slate-900">User Dashboard</h2>
+            <button onclick="openProfileModal()" class="px-4 py-2 rounded-full border border-slate-200 text-xs font-normal">Edit Profile</button>
+          </div>
+          <p class="text-xs text-slate-500">Role: <strong class="uppercase">${currentUser?.role || 'Student'}</strong></p>
+        </div>
+      `;
+
+      lucide.createIcons();
+    }
+
+    function createNewCoursePrompt() {
+      const title = prompt("Enter Course Title:");
+      if (!title) return;
+      const desc = prompt("Enter Brief Description:");
+      customCourses.unshift({
+        id: 'c-' + Date.now(),
+        title: title,
+        category: 'Coding & CS',
+        description: desc || 'Self-paced competition course',
+        mentorName: currentUser?.name || 'Peer Mentor',
+        thumbnail: 'assets/Homepage_Intro.png'
+      });
+      localStorage.setItem('im_courses', JSON.stringify(customCourses));
+      renderUI();
+    }
+
+    function createNewForumPrompt() {
+      const title = prompt("Enter Thread Title:");
+      if (!title) return;
+      const content = prompt("Enter Post Content:");
+      if (!content) return;
+
+      forumPosts.unshift({
+        id: 'p-' + Date.now(),
+        title: title,
+        content: content,
+        tag: 'General Tips',
+        authorName: currentUser?.name || 'Student Peer',
+        authorAvatar: currentUser?.avatar || 'assets/Website_Logo.png',
+        likes: 1,
+        createdAt: 'Just now'
+      });
+      localStorage.setItem('im_forum', JSON.stringify(forumPosts));
+      renderUI();
+    }
+
+    function likePost(id) {
+      forumPosts = forumPosts.map(p => p.id === id ? { ...p, likes: (p.likes || 0) + 1 } : p);
+      localStorage.setItem('im_forum', JSON.stringify(forumPosts));
+      renderUI();
+    }
+
+    function openProfileModal() {
+      if (!currentUser) return showPage('auth');
+      document.getElementById('edit-profile-name').value = currentUser.name || '';
+      document.getElementById('edit-profile-headline').value = currentUser.headline || '';
+      document.getElementById('edit-profile-avatar').value = currentUser.avatar || 'assets/Website_Logo.png';
+      document.getElementById('profile-modal-name').innerText = currentUser.name;
+      document.getElementById('profile-modal-email').innerText = currentUser.email;
+      document.getElementById('profile-modal-avatar').src = currentUser.avatar || 'assets/Website_Logo.png';
+      document.getElementById('profile-modal').classList.remove('hidden');
+      document.getElementById('profile-modal').classList.add('flex');
+    }
+
+    function closeProfileModal() {
+      document.getElementById('profile-modal').classList.add('hidden');
+      document.getElementById('profile-modal').classList.remove('flex');
+    }
+
+    function handleSaveProfile(e) {
+      e.preventDefault();
+      currentUser.name = document.getElementById('edit-profile-name').value;
+      currentUser.headline = document.getElementById('edit-profile-headline').value;
+      currentUser.avatar = document.getElementById('edit-profile-avatar').value;
+      localStorage.setItem('im_user', JSON.stringify(currentUser));
+      closeProfileModal();
+      renderUI();
+    }
+
+    function autofillCreator() {
+      document.getElementById('auth-email-input').value = 'rayqin864@gmail.com';
+      document.getElementById('auth-password-input').value = 'Woshitiancai10';
+    }
+
+    function handleAuthLogin(e) {
+      e.preventDefault();
+      const em = document.getElementById('auth-email-input').value;
+      const pw = document.getElementById('auth-password-input').value;
+
+      if (em === 'rayqin864@gmail.com' && pw === 'Woshitiancai10') {
+        currentUser = {
+          email: em,
+          name: 'Ray Qin (Creator & Admin)',
+          role: 'creator',
+          isAdmin: true,
+          avatar: 'assets/Website_Logo.png'
+        };
+      } else {
+        currentUser = {
+          email: em,
+          name: em.split('@')[0],
+          role: 'student',
+          isAdmin: false,
+          avatar: 'assets/Website_Logo.png'
+        };
+      }
+      localStorage.setItem('im_user', JSON.stringify(currentUser));
+      showPage('dashboard');
+    }
+
+    function handleSignOut() {
+      currentUser = null;
+      localStorage.removeItem('im_user');
+      showPage('home');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      showPage('home');
+    });
+  </script>
+</body>
+</html>
