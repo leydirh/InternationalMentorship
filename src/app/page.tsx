@@ -51,11 +51,11 @@ export default function HomePage() {
         <div className="w-full h-px bg-slate-200 my-8" />
       </section>
 
-      {/* 2. Top Banner (Requirement 1: LARGER ABOUT US SIGN & Black Overlay) */}
+      {/* 2. Top Banner (LARGER ABOUT US SIGN & Black Overlay) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <div className="relative rounded-3xl overflow-hidden bg-black text-white p-8 sm:p-16 shadow-2xl min-h-[480px] flex flex-col justify-end border border-slate-800">
           
-          <!-- Background image: Homepage_Intro.png -->
+          {/* Background image: Homepage_Intro.png */}
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
@@ -63,7 +63,7 @@ export default function HomePage() {
             }}
           />
           
-          <!-- Solid Black Overlay -->
+          {/* Solid Black Overlay */}
           <div className="absolute inset-0 bg-black/65 backdrop-blur-[2px]" />
 
           <div className="relative z-10 max-w-5xl space-y-6">
@@ -80,7 +80,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. Feature Callout Cards (Requirement 2: SWAPPED PICTURES) */}
+      {/* 3. Feature Callout Cards (SWAPPED PICTURES) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 space-y-6">
         
         {/* Yellow Card (Top): Contains Pink/Purple Steps (Homepage_Purple.png) on the Right side */}
@@ -210,7 +210,7 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
           
-          {/* Card 1: Asynchronous Learning (Requirement 4: Currently Not Available Notice Trigger) */}
+          {/* Card 1: Asynchronous Learning */}
           <div className="rounded-3xl border border-slate-200 bg-white p-10 sm:p-12 flex flex-col justify-between hover:shadow-xl transition-all duration-300 group">
             <div className="space-y-6">
               <div className="flex items-center justify-between">
@@ -306,7 +306,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* REQUIREMENT 4: ASYNC COURSES NOT AVAILABLE MODAL */}
+      {/* ASYNC COURSES NOT AVAILABLE MODAL */}
       {asyncNotAvailableModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl max-w-md w-full p-8 text-center space-y-6 shadow-2xl border border-slate-100 relative">
