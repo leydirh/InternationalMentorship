@@ -12,7 +12,7 @@ export default function CoursesPage() {
     <div className="min-h-screen bg-slate-50/50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-8">
         
-        {/* Requirement 4: Prominent Currently Not Available Announcement Banner */}
+        {/* Prominent Currently Not Available Announcement Banner */}
         <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 text-white shadow-xl space-y-4 border border-amber-400">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white shrink-0">
@@ -22,7 +22,7 @@ export default function CoursesPage() {
               <span className="px-3 py-1 rounded-full bg-white/20 text-white text-xs font-semibold uppercase tracking-wider">
                 System Announcement
               </span>
-              <h2 class="text-2xl font-semibold text-white mt-1">
+              <h2 className="text-2xl font-semibold text-white mt-1">
                 Asynchronous Courses Currently Not Available
               </h2>
             </div>

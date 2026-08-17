@@ -25,7 +25,7 @@ export default function Navbar() {
               />
             </div>
             <div>
-              <span class="font-semibold text-lg text-slate-900 tracking-tight block leading-tight">
+              <span className="font-semibold text-lg text-slate-900 tracking-tight block leading-tight">
                 International Mentorship
               </span>
               <span className="text-[11px] font-normal text-slate-400 block tracking-wide">
