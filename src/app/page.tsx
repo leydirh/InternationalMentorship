@@ -34,7 +34,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       
-      {/* 1. Header & Hero Title */}
+      {/* Section 1: Hero Header */}
       <section className="pt-16 pb-12 text-center max-w-5xl mx-auto px-4 sm:px-6">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-yellow-100 text-slate-800 text-xs font-normal mb-6 border border-brand-yellow-300">
           <Sparkles className="w-3.5 h-3.5 text-brand-purple-600" />
@@ -51,24 +51,20 @@ export default function HomePage() {
         <div className="w-full h-px bg-slate-200 my-8" />
       </section>
 
-      {/* 2. Top Banner (LARGER ABOUT US SIGN & Black Overlay) */}
+      {/* Section 2: Top Banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <div className="relative rounded-3xl overflow-hidden bg-black text-white p-8 sm:p-16 shadow-2xl min-h-[480px] flex flex-col justify-end border border-slate-800">
           
-          {/* Background image: Homepage_Intro.png */}
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: `url('/assets/Homepage_Intro.png')`,
+              backgroundImage: "url('/assets/Homepage_Intro.png')",
             }}
           />
           
-          {/* Solid Black Overlay */}
           <div className="absolute inset-0 bg-black/65 backdrop-blur-[2px]" />
 
           <div className="relative z-10 max-w-5xl space-y-6">
-            
-            {/* LARGER ABOUT US SIGN */}
             <div className="inline-block px-7 py-2.5 rounded-2xl border-2 border-white/50 bg-white/20 backdrop-blur-md text-base sm:text-lg font-semibold tracking-wider text-white shadow-lg uppercase">
               About Us
             </div>
@@ -80,10 +76,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. Feature Callout Cards (SWAPPED PICTURES) */}
+      {/* Section 3: Feature Callout Cards */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 space-y-6">
         
-        {/* Yellow Card (Top): Contains Pink/Purple Steps (Homepage_Purple.png) on the Right side */}
+        {/* Yellow Card (Top) */}
         <div className="relative rounded-3xl bg-[#FEF08A] text-slate-900 p-8 sm:p-12 overflow-hidden border border-amber-200/60 shadow-sm transition-transform hover:-translate-y-1 duration-300">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             <div className="md:col-span-2">
@@ -103,7 +99,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Purple Card (Bottom): Contains Yellow Torus Ring (Homepage_Yellow.png) on the Left side */}
+        {/* Purple Card (Bottom) */}
         <div className="relative rounded-3xl bg-[#DDD6FE] text-slate-900 p-8 sm:p-12 overflow-hidden border border-purple-200/60 shadow-sm transition-transform hover:-translate-y-1 duration-300">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             <div className="flex justify-start items-center order-2 md:order-1">
@@ -125,14 +121,13 @@ export default function HomePage() {
 
       </section>
 
-      {/* 4. Our Process Section */}
+      {/* Section 4: Our Process */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-28">
         <h2 className="text-4xl font-light text-slate-900 mb-14 text-left">
           Our Process
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          
           <div className="space-y-4">
             <div className="w-12 h-12 rounded-xl flex items-center justify-center text-slate-900 border border-slate-200 bg-slate-50">
               <BookOpen className="w-6 h-6" />
@@ -162,13 +157,12 @@ export default function HomePage() {
               Student mentors are able to offer advice and experience, from a familiar perspective of another student.
             </p>
           </div>
-
         </div>
 
         <div className="w-full h-px bg-slate-200 mt-20" />
       </section>
 
-      {/* 5. Quote Section */}
+      {/* Section 5: Quote */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-28">
         <div className="rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-2 bg-slate-950 text-white min-h-[520px]">
           
@@ -192,7 +186,7 @@ export default function HomePage() {
           <div
             className="relative min-h-[350px] md:min-h-full bg-cover bg-center"
             style={{
-              backgroundImage: `url('/assets/Homepage_Quote.avif')`,
+              backgroundImage: "url('/assets/Homepage_Quote.avif')",
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-transparent to-transparent hidden md:block" />
@@ -201,7 +195,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. Core Offering Pricing Cards */}
+      {/* Section 6: Core Offering Pricing Cards */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-28 text-center">
         <h2 className="text-4xl font-light text-slate-900 mb-3">Our Core Offering</h2>
         <p className="text-base font-extralight text-slate-500 mb-16">
@@ -306,7 +300,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ASYNC COURSES NOT AVAILABLE MODAL */}
+      {/* Async Not Available Modal */}
       {asyncNotAvailableModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl max-w-md w-full p-8 text-center space-y-6 shadow-2xl border border-slate-100 relative">
