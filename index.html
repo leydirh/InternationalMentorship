@@ -147,8 +147,6 @@
           <div class="absolute inset-0 bg-black/65 backdrop-blur-[2px]"></div>
 
           <div class="relative z-10 max-w-5xl space-y-6">
-            
-            <!-- Requirement 1: LARGER ABOUT US SIGN -->
             <div class="inline-block px-7 py-2.5 rounded-2xl border-2 border-white/50 bg-white/20 backdrop-blur-md text-base sm:text-lg font-semibold tracking-wider text-white shadow-lg uppercase">
               About Us
             </div>
@@ -160,7 +158,7 @@
         </div>
       </section>
 
-      <!-- 3. Feature Callout Cards (Requirement 2: SWAPPED PICTURES) -->
+      <!-- 3. Feature Callout Cards -->
       <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 space-y-6">
         
         <!-- Yellow Card (Top): Contains Pink/Purple Steps (Homepage_Purple.png) on the Right side -->
@@ -275,7 +273,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
           
-          <!-- Requirement 4: Asynchronous Learning Card triggers "Currently Not Available" Notice -->
+          <!-- Asynchronous Learning Card -->
           <div class="rounded-3xl border border-slate-200 bg-white p-10 sm:p-12 flex flex-col justify-between hover:shadow-xl transition-all">
             <div class="space-y-6">
               <div class="flex items-center justify-between">
@@ -348,11 +346,10 @@
 
     </div>
 
-    <!-- PAGE 2: COURSES PAGE (With Requirement 4 Currently Not Available Banner) -->
+    <!-- PAGE 2: COURSES PAGE -->
     <div id="page-courses" class="page-section hidden py-12 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto space-y-8">
         
-        <!-- Requirement 4: Prominent Currently Not Available Notice Banner -->
         <div class="p-8 rounded-3xl bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 text-white shadow-xl space-y-4 border border-amber-400">
           <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white shrink-0">
@@ -469,7 +466,7 @@
 
   </main>
 
-  <!-- REQUIREMENT 4: ASYNC NOT AVAILABLE MODAL -->
+  <!-- ASYNC NOT AVAILABLE MODAL -->
   <div id="async-not-available-modal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-md w-full p-8 text-center space-y-6 shadow-2xl border border-slate-100 relative">
       <button onclick="closeAsyncNotAvailableModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600">
@@ -536,14 +533,14 @@
     </div>
   </div>
 
-  <!-- FOOTER (REQUIREMENT 3: DROPDOWN MENU & REQUIREMENT 6: USER IM LOGO) -->
+  <!-- UPDATED FOOTER: Removed Deployment & Isolation, Removed Peer Mentors Link, Added Social Media Placeholder -->
   <footer class="bg-slate-950 text-slate-400 border-t border-slate-900 pt-16 pb-12 mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-slate-900">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-slate-900">
         
-        <!-- Requirement 6: USER IM LOGO in Footer -->
-        <div class="md:col-span-2 space-y-4">
+        <!-- Brand Intro Section -->
+        <div class="space-y-4">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 p-1 flex items-center justify-center shadow-md">
               <img src="assets/Website_Logo.png" alt="IM Logo" class="w-full h-full object-contain" />
@@ -552,52 +549,41 @@
               International Mentorship
             </span>
           </div>
-          <p class="text-sm font-extralight text-slate-400 max-w-md leading-relaxed">
-            Bridging the educational opportunity gap with competition guidance and 1-on-1 peer mentoring from national & international winners.
+          <p class="text-sm font-extralight text-slate-400 leading-relaxed">
+            Bridging the educational opportunity gap with free self-paced competition courses and 1-on-1 peer mentoring from national & international winners.
           </p>
+          <div class="flex flex-wrap items-center gap-4 text-xs text-slate-400 font-extralight pt-2">
+            <span class="flex items-center gap-1.5"><i data-lucide="globe" class="w-3.5 h-3.5 text-slate-500"></i> app.internationalmentorship.net</span>
+            <span class="flex items-center gap-1.5"><i data-lucide="mail" class="w-3.5 h-3.5 text-slate-500"></i> support@internationalmentorship.net</span>
+          </div>
         </div>
 
+        <!-- Navigation Links (Peer to Peer Mentors Link Removed) -->
         <div>
           <h4 class="text-xs font-semibold text-slate-200 uppercase tracking-wider mb-4">
             Navigation
           </h4>
           <ul class="space-y-2.5 text-sm font-extralight">
-            <li><a href="#home" onclick="showPage('home')" class="hover:text-white">Home</a></li>
-            <li><a href="#courses" onclick="showPage('courses')" class="hover:text-white">Async Courses</a></li>
-            <li><a href="#mentors" onclick="showPage('mentors')" class="hover:text-white">Peer Tutors</a></li>
-            <li><a href="#forum" onclick="showPage('forum')" class="hover:text-white">Community Forum</a></li>
+            <li><a href="#home" onclick="showPage('home')" class="hover:text-white transition-colors">Home</a></li>
+            <li><a href="#courses" onclick="showPage('courses')" class="hover:text-white transition-colors">Async Courses</a></li>
+            <li><a href="#forum" onclick="showPage('forum')" class="hover:text-white transition-colors">Community Forum</a></li>
           </ul>
         </div>
 
-        <!-- REQUIREMENT 3: DEPLOYMENT AND ISOLATION DROPDOWN MENU -->
+        <!-- Social Media Placeholder (Replaces Deployment & Isolation) -->
         <div>
           <h4 class="text-xs font-semibold text-slate-200 uppercase tracking-wider mb-4">
-            System Architecture
+            Connect With Us
           </h4>
-          
-          <details class="group p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 text-xs font-light text-slate-300">
-            <summary class="cursor-pointer font-medium text-slate-200 flex items-center justify-between select-none group-open:mb-3">
-              <span class="flex items-center gap-2 text-yellow-300 font-normal">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                Deployment & Isolation
-              </span>
-              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"></i>
-            </summary>
-            
-            <div class="space-y-2 pt-2 border-t border-slate-800 text-[11px] text-slate-400 leading-relaxed">
-              <p>
-                Operating independently on subdomain <code class="text-purple-300 font-mono">app.internationalmentorship.net</code> isolated from the live Bluehost WordPress server.
-              </p>
-              <div class="flex items-center gap-1.5 text-slate-300 font-mono pt-1">
-                <span>CORS Allowed Origins:</span>
-              </div>
-              <p class="font-mono text-[10px] text-slate-400">
-                • internationalmentorship.net<br/>
-                • app.internationalmentorship.net
-              </p>
+          <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 text-xs font-light text-slate-300 space-y-3">
+            <div class="flex items-center gap-2 text-slate-200 font-medium">
+              <i data-lucide="share-2" class="w-4 h-4 text-purple-400"></i>
+              <span>Visit Our Social Media</span>
             </div>
-          </details>
-
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Stay tuned for competition tips, updates, and announcements! Our official social media channels will be linked here soon.
+            </p>
+          </div>
         </div>
 
       </div>
