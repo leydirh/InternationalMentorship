@@ -12,7 +12,7 @@ export default function MentorsPage() {
 
   const teachers = allUsers.filter((u) => u.role === "teacher" || u.isVerifiedTeacher);
 
-  const [selectedMentor, setSelectedMentor] = useState<typeof teachers[0] | null>(null);
+  const [selectedMentor, setSelectedMentor] = useState<any>(null);
   const [selectedDate, setSelectedDate] = useState("2026-08-14");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("16:00 - 17:00 EST");
   const [sessionType, setSessionType] = useState<"Free Peer Consult" | "1-on-1 Mentoring Session ($75/hr)">("1-on-1 Mentoring Session ($75/hr)");
@@ -81,7 +81,7 @@ export default function MentorsPage() {
         {/* Mentors Grid with Plus Card */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
-          {/* Requirement 2: Plus Box to Add / Register Peer Mentor */}
+          {/* Plus Box to Add / Register Peer Mentor */}
           <Link
             href="/auth?tab=register"
             className="bg-white rounded-3xl border-2 border-dashed border-slate-300 hover:border-brand-purple-500 p-8 min-h-[360px] flex flex-col items-center justify-center space-y-4 hover:shadow-lg transition-all group text-center"

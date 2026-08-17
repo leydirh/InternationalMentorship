@@ -8,7 +8,7 @@ import { Play, CheckCircle, ArrowLeft, Clock, BookOpen, Award, Check, ChevronRig
 
 export default function CourseDetailPage() {
   const params = useParams();
-  const courseId = params.id as string;
+  const courseId = (params?.id as string) || "";
   const { courses, userProgress, markLessonComplete } = usePlatform();
 
   const course = courses.find((c) => c.id === courseId);
