@@ -3,7 +3,7 @@
   "name": "internationalmentorship",
   "compatibility_date": "2026-08-20",
   "assets": {
-    "directory": ".next"
+    "directory": "out"
   },
   "d1_databases": [
     {
