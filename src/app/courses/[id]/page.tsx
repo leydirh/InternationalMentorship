@@ -6,6 +6,17 @@ import { useParams } from "next/navigation";
 import { usePlatform } from "@/context/PlatformContext";
 import { Play, CheckCircle, ArrowLeft, Clock, BookOpen, Award, Check, ChevronRight } from "lucide-react";
 
+export function generateStaticParams() {
+  return [
+    { id: "1" },
+    { id: "2" },
+    { id: "3" },
+    { id: "4" },
+    { id: "5" },
+    { id: "default" },
+  ];
+}
+
 export default function CourseDetailPage() {
   const params = useParams();
   const courseId = (params?.id as string) || "";
