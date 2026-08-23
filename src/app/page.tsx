@@ -280,27 +280,9 @@ export default function HomePage() {
           </div>
 
         </div>
-
-        {/* Free Consultation Direct Banner */}
-        <div className="mt-14 p-10 rounded-3xl bg-gradient-to-r from-slate-900 via-brand-purple-950 to-slate-900 text-white flex flex-col sm:flex-row items-center justify-between gap-6 text-left shadow-lg">
-          <div>
-            <h3 className="text-2xl font-light text-white mb-1">
-              Want a Free Peer Consultation First?
-            </h3>
-            <p className="text-sm font-extralight text-slate-300">
-              Book a 15-minute 1-on-1 strategy call with an award-winning peer mentor completely free.
-            </p>
-          </div>
-          <button
-            onClick={() => setQuickBookOpen(true)}
-            className="shrink-0 px-8 py-3.5 rounded-full bg-brand-yellow-300 text-slate-900 font-normal text-base hover:bg-brand-yellow-400 transition-colors shadow-glow-yellow"
-          >
-            Book Free Consult Now
-          </button>
-        </div>
       </section>
 
-      {/* Async Not Available Modal */}
+      {/* Async Not Available Modal (Instagram Redirect) */}
       {asyncNotAvailableModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl max-w-md w-full p-8 text-center space-y-6 shadow-2xl border border-slate-100 relative">
@@ -318,18 +300,19 @@ export default function HomePage() {
             <div className="space-y-2">
               <h3 className="text-xl font-semibold text-slate-900">Currently Not Available</h3>
               <p className="text-xs font-extralight text-slate-600 leading-relaxed">
-                Our asynchronous self-paced course library is currently under construction and content verification. Please check back soon or book a 1-on-1 mentor session directly!
+                Our asynchronous self-paced course library is currently under construction. Please follow our Instagram page for announcements and competition updates!
               </p>
             </div>
 
             <div className="pt-2 space-y-2">
-              <Link
-                href="/mentors"
-                onClick={() => setAsyncNotAvailableModalOpen(false)}
+              <a
+                href="https://www.instagram.com/international.mentorship/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full block py-3 rounded-full bg-slate-900 text-white text-xs font-normal hover:bg-brand-purple-900 transition-colors"
               >
-                Explore 1-on-1 Peer Tutors
-              </Link>
+                Visit Our Instagram (@international.mentorship) →
+              </a>
               <button
                 onClick={() => setAsyncNotAvailableModalOpen(false)}
                 className="w-full py-2.5 rounded-full border border-slate-200 text-slate-600 text-xs font-normal"
