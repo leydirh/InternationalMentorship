@@ -21,4 +21,5 @@ export default {
       queue: "dummy",
     },
   },
+  dangerouslyUseUnsupportedNextVersion: true,
 };
