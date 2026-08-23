@@ -35,6 +35,10 @@ interface AuthContextType {
   role: Role;
   login: (email: string, pass: string, targetRole?: Role) => boolean;
   logout: () => void;
+  signOut: () => void;
+  isProfileModalOpen: boolean;
+  openProfileModal: () => void;
+  closeProfileModal: () => void;
   registerStudent: (name: string, email: string, pass: string) => boolean;
   submitTeacherApplication: (data: Omit<TeacherApplication, "id" | "status" | "submittedAt">) => void;
   teacherApplications: TeacherApplication[];
@@ -62,6 +66,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [teacherApplications, setTeacherApplications] = useState<TeacherApplication[]>([]);
   const [allUsers, setAllUsers] = useState<User[]>([DEFAULT_CREATOR]);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   useEffect(() => {
     const savedUser = localStorage.getItem("im_user");
@@ -115,6 +120,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
     localStorage.removeItem("im_user");
   };
+
+  const signOut = logout;
+
+  const openProfileModal = () => setIsProfileModalOpen(true);
+  const closeProfileModal = () => setIsProfileModalOpen(false);
 
   const registerStudent = (name: string, email: string, pass: string): boolean => {
     const studentUser: User = {
@@ -210,6 +220,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         role: user?.role || "student",
         login,
         logout,
+        signOut,
+        isProfileModalOpen,
+        openProfileModal,
+        closeProfileModal,
         registerStudent,
         submitTeacherApplication,
         teacherApplications,
