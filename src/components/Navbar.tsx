@@ -59,17 +59,6 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/mentors"
-              className={`px-4 py-2 rounded-full text-sm font-light flex items-center gap-2 transition-colors ${
-                pathname.startsWith("/mentors")
-                  ? "bg-slate-900 text-white"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
-              }`}
-            >
-              <Calendar className="w-4 h-4" /> Peer Mentors
-            </Link>
-
-            <Link
               href="/forum"
               className={`px-4 py-2 rounded-full text-sm font-light flex items-center gap-2 transition-colors ${
                 pathname.startsWith("/forum")
