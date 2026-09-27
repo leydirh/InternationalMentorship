@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Check, BookOpen, MessageSquare, Lightbulb, Calendar, X, Sparkles, AlertTriangle } from "lucide-react";
+import { ArrowRight, Check, BookOpen, MessageSquare, Lightbulb, Calendar, X, Sparkles, AlertTriangle, Mail, Send, Instagram } from "lucide-react";
 import { usePlatform } from "@/context/PlatformContext";
 
 export default function HomePage() {
@@ -13,6 +13,43 @@ export default function HomePage() {
   const [studentName, setStudentName] = useState("");
   const [studentEmail, setStudentEmail] = useState("");
   const [bookedSuccess, setBookedSuccess] = useState<string | null>(null);
+
+  // Contact Form State
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactSubject, setContactSubject] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
+  const [contactSubmitting, setContactSubmitting] = useState(false);
+  const [contactSubmitted, setContactSubmitted] = useState(false);
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!contactName || !contactEmail || !contactMessage) return;
+    setContactSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: contactName,
+          email: contactEmail,
+          subject: contactSubject || "General Inquiry",
+          message: contactMessage,
+        }),
+      });
+      if (res.ok) {
+        setContactSubmitted(true);
+        setContactName("");
+        setContactEmail("");
+        setContactSubject("");
+        setContactMessage("");
+      }
+    } catch (err) {
+      console.error("Failed to submit contact message", err);
+    } finally {
+      setContactSubmitting(false);
+    }
+  };
 
   const handleQuickBook = (e: React.FormEvent) => {
     e.preventDefault();
@@ -263,6 +300,148 @@ export default function HomePage() {
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* Section 5: Contact Us & Connect */}
+      <section id="contact" className="py-20 bg-slate-900 text-white relative overflow-hidden border-t border-slate-800">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            
+            {/* Left Column: Direct Info & Mailto */}
+            <div className="space-y-6">
+              <span className="text-xs uppercase tracking-widest text-brand-purple-300 font-semibold px-3 py-1 rounded-full bg-brand-purple-950/60 border border-brand-purple-800/50 inline-block">
+                Get In Touch
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-light tracking-tight text-white leading-tight">
+                Contact & Connect With Us
+              </h2>
+              <p className="text-base font-extralight text-slate-300 leading-relaxed max-w-lg">
+                Have questions about our peer mentorship programs, async courses, or looking to collaborate? Drop us a message or email us directly!
+              </p>
+
+              <div className="space-y-4 pt-4">
+                <a 
+                  href="mailto:xy3mmzx@gmail.com"
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/70 border border-slate-700/60 hover:bg-slate-800 transition-colors group"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center shrink-0 border border-purple-500/30">
+                    <Mail className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span className="text-xs text-slate-400 font-light block">Direct Email</span>
+                    <span className="text-base font-medium text-white group-hover:text-purple-300 transition-colors">
+                      xy3mmzx@gmail.com
+                    </span>
+                  </div>
+                </a>
+
+                <a 
+                  href="https://www.instagram.com/international.mentorship/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/70 border border-slate-700/60 hover:bg-slate-800 transition-colors group"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-pink-500/20 text-pink-300 flex items-center justify-center shrink-0 border border-pink-500/30">
+                    <Instagram className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span className="text-xs text-slate-400 font-light block">Follow Us on Instagram</span>
+                    <span className="text-base font-medium text-white group-hover:text-pink-300 transition-colors">
+                      @international.mentorship
+                    </span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Right Column: Interactive Form */}
+            <div className="bg-slate-950 p-8 rounded-3xl border border-slate-800 shadow-xl">
+              {contactSubmitted ? (
+                <div className="text-center py-10 space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/30">
+                    <Check className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-2xl font-light text-white">Message Received!</h3>
+                  <p className="text-xs font-extralight text-slate-400 leading-relaxed max-w-sm mx-auto">
+                    Thank you for reaching out. Your inquiry has been saved and sent to <span className="text-slate-200 underline">xy3mmzx@gmail.com</span>. We will respond shortly!
+                  </p>
+                  <button
+                    onClick={() => setContactSubmitted(false)}
+                    className="mt-4 px-6 py-2.5 rounded-full bg-slate-800 text-xs text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
+                  >
+                    Send Another Message
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleContactSubmit} className="space-y-4">
+                  <h3 className="text-xl font-normal text-white mb-2">Send Us a Message</h3>
+                  
+                  <div>
+                    <label className="block text-xs font-light text-slate-300 mb-1">Your Name</label>
+                    <input
+                      type="text"
+                      required
+                      value={contactName}
+                      onChange={(e) => setContactName(e.target.value)}
+                      placeholder="e.g. Alex Morgan"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-light text-slate-300 mb-1">Your Email</label>
+                    <input
+                      type="email"
+                      required
+                      value={contactEmail}
+                      onChange={(e) => setContactEmail(e.target.value)}
+                      placeholder="alex@example.com"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-light text-slate-300 mb-1">Subject</label>
+                    <input
+                      type="text"
+                      value={contactSubject}
+                      onChange={(e) => setContactSubject(e.target.value)}
+                      placeholder="e.g. Inquiry about Peer Mentorship"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-light text-slate-300 mb-1">Message</label>
+                    <textarea
+                      required
+                      rows={4}
+                      value={contactMessage}
+                      onChange={(e) => setContactMessage(e.target.value)}
+                      placeholder="Type your message here..."
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={contactSubmitting}
+                    className="w-full py-3 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-normal text-sm transition-colors shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
+                  >
+                    {contactSubmitting ? (
+                      "Sending..."
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" /> Send Message
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
+            </div>
+
+          </div>
         </div>
       </section>
 
