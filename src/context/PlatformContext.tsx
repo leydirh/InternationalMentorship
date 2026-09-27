@@ -112,6 +112,29 @@ export const PlatformProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     if (savedBookings) try { setBookings(JSON.parse(savedBookings)); } catch (e) { console.error(e); }
     if (savedForum) try { setForumPosts(JSON.parse(savedForum)); } catch (e) { console.error(e); }
     if (savedDms) try { setDirectMessages(JSON.parse(savedDms)); } catch (e) { console.error(e); }
+
+    // Fetch live forum posts from Cloudflare D1 SQL database
+    fetch("/api/forum")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.posts && data.posts.length > 0) {
+          const formattedPosts: ForumPost[] = data.posts.map((p: any) => ({
+            id: p.id,
+            title: p.title,
+            content: p.content,
+            tag: p.tag,
+            authorName: p.author_name || p.authorName,
+            authorRole: p.author_role || p.authorRole || "Student",
+            authorEmail: p.author_email || p.authorEmail || "",
+            likes: p.likes || 0,
+            commentsCount: p.comments_count || p.commentsCount || 0,
+            createdAt: p.created_at ? new Date(p.created_at).toLocaleDateString() : "Just now",
+            replies: [],
+          }));
+          setForumPosts(formattedPosts);
+        }
+      })
+      .catch((err) => console.error("Error fetching D1 forum posts:", err));
   }, []);
 
   const markLessonComplete = (courseId: string, lessonId: string) => {
@@ -168,9 +191,24 @@ export const PlatformProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       createdAt: "Just now",
       replies: [],
     };
+
     const updated = [newPost, ...forumPosts];
     setForumPosts(updated);
     localStorage.setItem("im_forum", JSON.stringify(updated));
+
+    // Save to Cloudflare D1 SQL database
+    fetch("/api/forum", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title,
+        content,
+        tag,
+        authorName,
+        authorRole,
+        authorEmail,
+      }),
+    }).catch((err) => console.error("Error saving forum post to D1:", err));
   };
 
   const addForumReply = (postId: string, content: string, authorName: string, authorRole: string) => {
@@ -206,6 +244,13 @@ export const PlatformProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     });
     setForumPosts(updated);
     localStorage.setItem("im_forum", JSON.stringify(updated));
+
+    // Sync like with Cloudflare D1 SQL database
+    fetch("/api/forum", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ postId, action: "like" }),
+    }).catch((err) => console.error("Error liking forum post in D1:", err));
   };
 
   const deleteForumPost = (postId: string) => {
