@@ -37,7 +37,7 @@ export default function HomePage() {
       {/* Section 1: Hero Header */}
       <section className="pt-16 pb-12 text-center max-w-5xl mx-auto px-4 sm:px-6">
         <h1 className="text-5xl sm:text-7xl font-light text-slate-900 tracking-tight leading-tight mb-4">
-          Peer to Peer Mentorship
+          International Mentorship
         </h1>
         <p className="text-xl sm:text-2xl font-extralight text-slate-500 mb-8">
           Providing quality education to all.
