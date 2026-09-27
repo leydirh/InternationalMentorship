@@ -36,11 +36,6 @@ export default function HomePage() {
       
       {/* Section 1: Hero Header */}
       <section className="pt-16 pb-12 text-center max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-yellow-100 text-slate-800 text-xs font-normal mb-6 border border-brand-yellow-300">
-          <Sparkles className="w-3.5 h-3.5 text-brand-purple-600" />
-          <span>Extracurricular & Competition Mentorship</span>
-        </div>
-
         <h1 className="text-5xl sm:text-7xl font-light text-slate-900 tracking-tight leading-tight mb-4">
           Peer to Peer Mentorship
         </h1>
