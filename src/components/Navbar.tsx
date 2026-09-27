@@ -69,16 +69,6 @@ export default function Navbar() {
               <MessageSquare className="w-4 h-4" /> Forum & Tips
             </Link>
 
-            <Link
-              href="/dashboard"
-              className={`px-4 py-2 rounded-full text-sm font-light flex items-center gap-2 transition-colors ${
-                pathname.startsWith("/dashboard")
-                  ? "bg-slate-900 text-white"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
-              }`}
-            >
-              <UserCheck className="w-4 h-4" /> Dashboard
-            </Link>
           </nav>
 
           {/* Right Profile & Spacing Section */}
