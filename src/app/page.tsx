@@ -59,7 +59,7 @@ export default function HomePage() {
             About Us
           </div>
           <p className="text-xl sm:text-3xl font-light leading-relaxed text-slate-100 tracking-wide max-w-5xl">
-            The criteria for university admission moves beyond grades...
+            The criteria for university admission moves beyond grades to showcase practical competence such as debating skills, building applications, launching startups, and pitching. Our organization addresses this challenge with a free, self-paced library of courses tailored to competitions, coupled with affordable real-time mentoring by verified near-peer winners of competitions.
           </p>
         </div>
       </section>
