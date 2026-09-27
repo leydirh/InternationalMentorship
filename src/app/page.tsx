@@ -17,7 +17,6 @@ export default function HomePage() {
   // Contact Form State
   const [contactName, setContactName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
-  const [contactSubject, setContactSubject] = useState("");
   const [contactMessage, setContactMessage] = useState("");
   const [contactSubmitting, setContactSubmitting] = useState(false);
   const [contactSubmitted, setContactSubmitted] = useState(false);
@@ -33,7 +32,7 @@ export default function HomePage() {
         body: JSON.stringify({
           name: contactName,
           email: contactEmail,
-          subject: contactSubject || "General Inquiry",
+          subject: "General Inquiry",
           message: contactMessage,
         }),
       });
@@ -41,7 +40,6 @@ export default function HomePage() {
         setContactSubmitted(true);
         setContactName("");
         setContactEmail("");
-        setContactSubject("");
         setContactMessage("");
       }
     } catch (err) {
@@ -372,8 +370,7 @@ export default function HomePage() {
                       required
                       value={contactName}
                       onChange={(e) => setContactName(e.target.value)}
-                      placeholder="e.g. Alex Morgan"
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
                     />
                   </div>
 
@@ -384,19 +381,7 @@ export default function HomePage() {
                       required
                       value={contactEmail}
                       onChange={(e) => setContactEmail(e.target.value)}
-                      placeholder="alex@example.com"
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-medium text-slate-700 mb-1">Subject</label>
-                    <input
-                      type="text"
-                      value={contactSubject}
-                      onChange={(e) => setContactSubject(e.target.value)}
-                      placeholder="e.g. Inquiry about Peer Mentorship"
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
                     />
                   </div>
 
@@ -407,8 +392,7 @@ export default function HomePage() {
                       rows={4}
                       value={contactMessage}
                       onChange={(e) => setContactMessage(e.target.value)}
-                      placeholder="Type your message here..."
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 resize-none"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 resize-none"
                     />
                   </div>
 
