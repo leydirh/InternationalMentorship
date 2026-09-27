@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { usePlatform } from "@/context/PlatformContext";
-import { MessageSquare, ThumbsUp, Send, MessageCircle, Plus, Trash2, ShieldCheck, X } from "lucide-react";
+import { MessageSquare, ThumbsUp, Send, MessageCircle, Plus, Trash2, Lock, X } from "lucide-react";
 
 export default function ForumPage() {
   const { user } = useAuth();
@@ -18,11 +19,11 @@ export default function ForumPage() {
   } = usePlatform();
 
   const [activeTab, setActiveTab] = useState<"forum" | "chat">("forum");
-  const [selectedTag, setSelectedTag] = useState("All");
   const [postTitle, setPostTitle] = useState("");
   const [postContent, setPostContent] = useState("");
-  const [postTag, setPostTag] = useState("CS & USACO");
+  const [postTag, setPostTag] = useState("General Tips");
   const [showNewPostModal, setShowNewPostModal] = useState(false);
+  const [showAuthRequiredModal, setShowAuthRequiredModal] = useState(false);
 
   // Reply State
   const [activePostId, setActivePostId] = useState<string | null>(null);
@@ -32,11 +33,13 @@ export default function ForumPage() {
   const [activeChatRecipient, setActiveChatRecipient] = useState({ id: "creator-001", name: "Ray Qin (Creator & Admin)" });
   const [dmText, setDmText] = useState("");
 
-  const tags = ["All", "CS & USACO", "Business & DECA", "Debate", "General Tips"];
-
-  const filteredPosts = forumPosts.filter(
-    (p) => selectedTag === "All" || p.tag.toLowerCase().includes(selectedTag.toLowerCase())
-  );
+  const handleCreatePostClick = () => {
+    if (!user) {
+      setShowAuthRequiredModal(true);
+    } else {
+      setShowNewPostModal(true);
+    }
+  };
 
   const handleCreatePost = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,6 +58,10 @@ export default function ForumPage() {
   };
 
   const handleCreateReply = (postId: string) => {
+    if (!user) {
+      setShowAuthRequiredModal(true);
+      return;
+    }
     if (!replyText.trim()) return;
     addForumReply(
       postId,
@@ -67,6 +74,10 @@ export default function ForumPage() {
 
   const handleSendDm = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) {
+      setShowAuthRequiredModal(true);
+      return;
+    }
     if (!dmText.trim()) return;
     sendDirectMessage(
       user?.id || "guest-1",
@@ -120,31 +131,12 @@ export default function ForumPage() {
         {activeTab === "forum" ? (
           <div className="space-y-6">
             
-            {/* Filter Tags */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
-                {tags.map((t) => (
-                  <button
-                    key={t}
-                    onClick={() => setSelectedTag(t)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-light shrink-0 transition-all ${
-                      selectedTag === t
-                        ? "bg-brand-purple-900 text-white font-normal"
-                        : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
-                    }`}
-                  >
-                    #{t}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Posts Grid including Requirement 2 Plus Card */}
+            {/* Posts Grid including Plus Card */}
             <div className="space-y-4">
               
               {/* Plus Box to Create Thread */}
               <button
-                onClick={() => setShowNewPostModal(true)}
+                onClick={handleCreatePostClick}
                 className="w-full bg-white rounded-3xl border-2 border-dashed border-slate-300 hover:border-brand-purple-500 p-6 flex items-center justify-center gap-3 hover:shadow-md transition-all group cursor-pointer text-slate-700"
               >
                 <div className="w-10 h-10 rounded-full bg-brand-purple-50 text-brand-purple-700 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -154,7 +146,7 @@ export default function ForumPage() {
               </button>
 
               {/* Forum Post Cards */}
-              {filteredPosts.map((post) => (
+              {forumPosts.map((post) => (
                 <div
                   key={post.id}
                   className="bg-white rounded-3xl border border-slate-200 p-6 space-y-4 hover:shadow-md transition-shadow"
@@ -234,9 +226,12 @@ export default function ForumPage() {
                       <div className="flex gap-2 pt-2">
                         <input
                           type="text"
-                          placeholder="Write your reply..."
+                          placeholder={user ? "Write your reply..." : "Sign in to reply..."}
                           value={replyText}
                           onChange={(e) => setReplyText(e.target.value)}
+                          onFocus={() => {
+                            if (!user) setShowAuthRequiredModal(true);
+                          }}
                           className="flex-grow px-4 py-2 rounded-full border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-brand-purple-500 bg-white"
                         />
                         <button
@@ -319,9 +314,12 @@ export default function ForumPage() {
               <form onSubmit={handleSendDm} className="mt-4 flex gap-2">
                 <input
                   type="text"
-                  placeholder="Type a message..."
+                  placeholder={user ? "Type a message..." : "Sign in to chat..."}
                   value={dmText}
                   onChange={(e) => setDmText(e.target.value)}
+                  onFocus={() => {
+                    if (!user) setShowAuthRequiredModal(true);
+                  }}
                   className="flex-grow px-4 py-2.5 rounded-full border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-brand-purple-500 bg-white"
                 />
                 <button
@@ -338,7 +336,7 @@ export default function ForumPage() {
         {/* New Post Modal */}
         {showNewPostModal && (
           <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="bg-white rounded-3xl max-w-md w-full p-8 space-y-4 shadow-2xl border border-slate-100">
+            <div className="bg-white rounded-3xl max-w-md w-full p-8 space-y-4 shadow-2xl border border-slate-100 relative">
               <button
                 onClick={() => setShowNewPostModal(false)}
                 className="absolute top-6 right-6 text-slate-400 hover:text-slate-600"
@@ -348,25 +346,25 @@ export default function ForumPage() {
 
               <h3 className="text-xl font-normal text-slate-900">Create Forum Thread</h3>
 
-              <form onSubmit={handleCreatePost} className="space-y-4 text-xs">
+              <form onSubmit={handleCreatePost} className="space-y-4 pt-2">
                 <div>
-                  <label className="block font-medium text-slate-700 mb-1">Thread Title</label>
+                  <label className="block text-xs font-medium text-slate-700 mb-1">Thread Title</label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. How to prepare for DECA roleplay judging..."
+                    placeholder="e.g. Tips for USACO Bronze to Silver?"
                     value={postTitle}
                     onChange={(e) => setPostTitle(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-purple-500"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-brand-purple-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-medium text-slate-700 mb-1">Topic Tag</label>
+                  <label className="block text-xs font-medium text-slate-700 mb-1">Topic Category</label>
                   <select
                     value={postTag}
                     onChange={(e) => setPostTag(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-purple-500 bg-white"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-brand-purple-500 bg-white"
                   >
                     <option value="CS & USACO">CS & USACO</option>
                     <option value="Business & DECA">Business & DECA</option>
@@ -376,33 +374,64 @@ export default function ForumPage() {
                 </div>
 
                 <div>
-                  <label className="block font-medium text-slate-700 mb-1">Content</label>
+                  <label className="block text-xs font-medium text-slate-700 mb-1">Question or Advice</label>
                   <textarea
-                    rows={4}
                     required
-                    placeholder="Share your advice or ask your competition question..."
+                    rows={4}
+                    placeholder="Share details, code snippets, or debate strategy questions..."
                     value={postContent}
                     onChange={(e) => setPostContent(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-purple-500"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-brand-purple-500"
                   />
                 </div>
 
-                <div className="flex gap-2 pt-2">
-                  <button
-                    type="button"
-                    onClick={() => setShowNewPostModal(false)}
-                    className="w-1/2 py-3 rounded-full border border-slate-200 text-slate-700 font-normal hover:bg-slate-50"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="w-1/2 py-3 rounded-full bg-slate-900 text-white font-normal hover:bg-brand-purple-900 shadow-md"
-                  >
-                    Publish Thread
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  className="w-full py-3 rounded-full bg-slate-900 text-white font-normal text-xs hover:bg-brand-purple-900 transition-colors shadow-md mt-2"
+                >
+                  Publish Post
+                </button>
               </form>
+            </div>
+          </div>
+        )}
+
+        {/* Auth Required Modal */}
+        {showAuthRequiredModal && (
+          <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <div className="bg-white rounded-3xl max-w-md w-full p-8 text-center space-y-6 shadow-2xl border border-slate-100 relative">
+              <button
+                onClick={() => setShowAuthRequiredModal(false)}
+                className="absolute top-6 right-6 text-slate-400 hover:text-slate-600"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mx-auto border border-amber-300">
+                <Lock className="w-7 h-7" />
+              </div>
+
+              <div className="space-y-2">
+                <h3 className="text-xl font-normal text-slate-900">Sign In Required</h3>
+                <p className="text-xs font-light text-slate-600 leading-relaxed">
+                  You must be signed in to create a thread or post on the community forum.
+                </p>
+              </div>
+
+              <div className="pt-2 space-y-3">
+                <Link
+                  href="/auth?tab=signin"
+                  className="w-full block py-3 rounded-full bg-slate-900 text-white text-xs font-medium hover:bg-brand-purple-900 transition-colors shadow-md"
+                >
+                  Sign In / Create Account
+                </Link>
+                <button
+                  onClick={() => setShowAuthRequiredModal(false)}
+                  className="w-full py-2.5 rounded-full border border-slate-200 text-slate-600 text-xs font-normal hover:bg-slate-50 transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         )}
