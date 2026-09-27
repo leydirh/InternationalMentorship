@@ -83,13 +83,10 @@ export default function HomePage() {
               </p>
             </div>
             <div className="flex justify-end items-center">
-              <div className="bg-white p-3 rounded-2xl border border-white/80 shadow-md flex items-center justify-center">
                 <img
                   src="/assets/Homepage_Purple.png"
                   alt="Purple Steps Graphic"
-                  className="w-40 sm:w-44 h-auto object-contain rounded-xl"
                 />
-              </div>
             </div>
           </div>
         </div>
@@ -98,13 +95,10 @@ export default function HomePage() {
         <div className="relative rounded-3xl bg-[#DDD6FE] text-slate-900 p-8 sm:p-12 overflow-hidden border border-purple-200/60 shadow-sm transition-transform hover:-translate-y-1 duration-300">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             <div className="flex justify-start items-center order-2 md:order-1">
-              <div className="bg-white p-3 rounded-2xl border border-white/80 shadow-md flex items-center justify-center">
                 <img
                   src="/assets/Homepage_Yellow.png"
                   alt="Yellow Torus Shape"
-                  className="w-36 sm:w-40 h-auto object-contain rounded-xl"
                 />
-              </div>
             </div>
             <div className="md:col-span-2 order-1 md:order-2">
               <p className="text-xl sm:text-2xl font-light leading-relaxed text-slate-900">
