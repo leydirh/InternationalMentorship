@@ -79,6 +79,7 @@ export default function HomePage() {
                 <img
                   src="/assets/Homepage_Purple.png"
                   alt="Purple Steps Graphic"
+                  className="w-48 sm:w-60 h-auto object-contain mix-blend-multiply"
                 />
             </div>
           </div>
@@ -91,6 +92,7 @@ export default function HomePage() {
                 <img
                   src="/assets/Homepage_Yellow.png"
                   alt="Yellow Torus Shape"
+                  className="w-48 sm:w-60 h-auto object-contain mix-blend-multiply"
                 />
             </div>
             <div className="md:col-span-2 order-1 md:order-2">
