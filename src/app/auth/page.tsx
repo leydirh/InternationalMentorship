@@ -125,28 +125,6 @@ function AuthFormContent() {
 
         {authMode === "signin" ? (
           <div className="bg-white rounded-3xl border border-slate-200 p-8 space-y-6 shadow-sm">
-            <div className="p-4 rounded-2xl bg-brand-yellow-50 border border-brand-yellow-200 text-xs font-extralight text-slate-800 space-y-2">
-              <div className="flex items-center justify-between font-normal text-slate-900">
-                <span className="flex items-center gap-1.5 text-brand-purple-800 font-semibold">
-                  <ShieldAlert className="w-4 h-4" /> Creator/Admin Account
-                </span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEmail("rayqin864@gmail.com");
-                    setPassword("Woshitiancai10");
-                    setSelectedRole("creator");
-                  }}
-                  className="px-3 py-1 rounded-full bg-slate-900 text-white text-[11px] font-normal hover:bg-brand-purple-900"
-                >
-                  Autofill Creator
-                </button>
-              </div>
-              <p className="text-[11px] text-slate-600 leading-relaxed">
-                Email: <code className="font-mono text-slate-900 font-medium">rayqin864@gmail.com</code> | Password: <code className="font-mono text-slate-900 font-medium">Woshitiancai10</code>
-              </p>
-            </div>
-
             <form onSubmit={handleSignIn} className="space-y-4 text-xs">
               <div>
                 <label className="block font-medium text-slate-700 mb-1">Email Address</label>
@@ -157,7 +135,7 @@ function AuthFormContent() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="student@example.com or rayqin864@gmail.com"
+                    placeholder="Enter your email address"
                     className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-purple-500"
                   />
                 </div>
@@ -172,7 +150,7 @@ function AuthFormContent() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••••••"
+                    placeholder="Enter your password"
                     className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-purple-500"
                   />
                 </div>
