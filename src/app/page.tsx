@@ -47,8 +47,7 @@ export default function HomePage() {
       </section>
 
       {/* Section 2: Top Banner */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <div className="relative rounded-3xl overflow-hidden bg-black text-white p-8 sm:p-16 shadow-2xl min-h-[480px] flex flex-col justify-end border border-slate-800">
+      <section className="w-full mb-20">
           
           <div
             className="absolute inset-0 bg-cover bg-center"
@@ -68,7 +67,6 @@ export default function HomePage() {
               The criteria for university admission moves beyond grades to showcase practical competence such as debating skills, building applications, launching startups, and pitching. Our organization addresses this challenge with a free, self-paced library of courses tailored to competitions, coupled with affordable real-time mentoring by verified near-peer winners of competitions.
             </p>
           </div>
-        </div>
       </section>
 
       {/* Section 3: Feature Callout Cards */}
