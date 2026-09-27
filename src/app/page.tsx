@@ -47,26 +47,21 @@ export default function HomePage() {
       </section>
 
       {/* Section 2: Top Banner */}
-      <section className="w-full mb-20">
-          
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: "url('/assets/Homepage_Intro.png')",
-            }}
-          />
-          
-          <div className="absolute inset-0 bg-black/65 backdrop-blur-[2px]" />
-
-          <div className="relative z-10 max-w-5xl space-y-6">
-            <div className="inline-block px-7 py-2.5 rounded-2xl border-2 border-white/50 bg-white/20 backdrop-blur-md text-base sm:text-lg font-semibold tracking-wider text-white shadow-lg uppercase">
-              About Us
-            </div>
-
-            <p className="text-xl sm:text-3xl font-light leading-relaxed text-slate-100 tracking-wide">
-              The criteria for university admission moves beyond grades to showcase practical competence such as debating skills, building applications, launching startups, and pitching. Our organization addresses this challenge with a free, self-paced library of courses tailored to competitions, coupled with affordable real-time mentoring by verified near-peer winners of competitions.
-            </p>
+      <section className="relative w-full overflow-hidden bg-black text-white py-16 sm:py-20 mb-20 min-h-[480px] flex flex-col justify-end border-y border-slate-800">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/assets/Homepage_Intro.png')" }}
+        />
+        <div className="absolute inset-0 bg-black/65 backdrop-blur-[2px]" />
+      
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-6">
+          <div className="inline-block px-7 py-2.5 rounded-2xl border-2 border-white/50 bg-white/20 backdrop-blur-md text-base sm:text-lg font-semibold tracking-wider text-white shadow-lg uppercase">
+            About Us
           </div>
+          <p className="text-xl sm:text-3xl font-light leading-relaxed text-slate-100 tracking-wide max-w-5xl">
+            The criteria for university admission moves beyond grades...
+          </p>
+        </div>
       </section>
 
       {/* Section 3: Feature Callout Cards */}
