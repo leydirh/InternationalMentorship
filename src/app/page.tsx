@@ -49,7 +49,7 @@ export default function HomePage() {
       {/* Section 2: Top Banner */}
       <section className="relative w-full overflow-hidden bg-black text-white py-16 sm:py-20 mb-20 min-h-[480px] flex flex-col justify-end border-y border-slate-800">
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{ backgroundImage: "url('/assets/Homepage_Intro.png')" }}
         />
         <div className="absolute inset-0 bg-black/65 backdrop-blur-[2px]" />
