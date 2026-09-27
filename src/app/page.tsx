@@ -304,130 +304,118 @@ export default function HomePage() {
       </section>
 
       {/* Section 5: Contact Us & Connect */}
-      <section id="contact" className="py-20 bg-slate-900 text-white relative overflow-hidden border-t border-slate-800">
+      <section id="contact" className="py-20 bg-slate-50 text-slate-900 relative overflow-hidden border-t border-slate-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
-            {/* Left Column: Direct Info & Mailto */}
-            <div className="space-y-6">
-              <span className="text-xs uppercase tracking-widest text-brand-purple-300 font-semibold px-3 py-1 rounded-full bg-brand-purple-950/60 border border-brand-purple-800/50 inline-block">
-                Get In Touch
-              </span>
-              <h2 className="text-4xl sm:text-5xl font-light tracking-tight text-white leading-tight">
-                Contact & Connect With Us
-              </h2>
-              <p className="text-base font-extralight text-slate-300 leading-relaxed max-w-lg">
-                Have questions about our peer mentorship programs, async courses, or looking to collaborate? Drop us a message or email us directly!
-              </p>
+            {/* Left Column: Direct Info Cards */}
+            <div className="space-y-4">
+              <a 
+                href="mailto:xy3mmzx@gmail.com"
+                className="flex items-center gap-4 p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md transition-all group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center shrink-0 border border-purple-200">
+                  <Mail className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="text-xs text-slate-500 font-light block">Direct Email</span>
+                  <span className="text-base font-medium text-slate-900 group-hover:text-purple-600 transition-colors">
+                    xy3mmzx@gmail.com
+                  </span>
+                </div>
+              </a>
 
-              <div className="space-y-4 pt-4">
-                <a 
-                  href="mailto:xy3mmzx@gmail.com"
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/70 border border-slate-700/60 hover:bg-slate-800 transition-colors group"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center shrink-0 border border-purple-500/30">
-                    <Mail className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <span className="text-xs text-slate-400 font-light block">Direct Email</span>
-                    <span className="text-base font-medium text-white group-hover:text-purple-300 transition-colors">
-                      xy3mmzx@gmail.com
-                    </span>
-                  </div>
-                </a>
-
-                <a 
-                  href="https://www.instagram.com/international.mentorship/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/70 border border-slate-700/60 hover:bg-slate-800 transition-colors group"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-pink-500/20 text-pink-300 flex items-center justify-center shrink-0 border border-pink-500/30">
-                    <Instagram className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <span className="text-xs text-slate-400 font-light block">Follow Us on Instagram</span>
-                    <span className="text-base font-medium text-white group-hover:text-pink-300 transition-colors">
-                      @international.mentorship
-                    </span>
-                  </div>
-                </a>
-              </div>
+              <a 
+                href="https://www.instagram.com/international.mentorship/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md transition-all group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center shrink-0 border border-pink-200">
+                  <Instagram className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="text-xs text-slate-500 font-light block">Follow Us on Instagram</span>
+                  <span className="text-base font-medium text-slate-900 group-hover:text-pink-600 transition-colors">
+                    @international.mentorship
+                  </span>
+                </div>
+              </a>
             </div>
 
             {/* Right Column: Interactive Form */}
-            <div className="bg-slate-950 p-8 rounded-3xl border border-slate-800 shadow-xl">
+            <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
               {contactSubmitted ? (
                 <div className="text-center py-10 space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/30">
+                  <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto border border-emerald-200">
                     <Check className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-light text-white">Message Received!</h3>
-                  <p className="text-xs font-extralight text-slate-400 leading-relaxed max-w-sm mx-auto">
-                    Thank you for reaching out. Your inquiry has been saved and sent to <span className="text-slate-200 underline">xy3mmzx@gmail.com</span>. We will respond shortly!
+                  <h3 className="text-2xl font-light text-slate-900">Message Received!</h3>
+                  <p className="text-xs font-extralight text-slate-600 leading-relaxed max-w-sm mx-auto">
+                    Thank you for reaching out. Your inquiry has been saved and sent to <span className="text-slate-900 font-normal underline">xy3mmzx@gmail.com</span>. We will respond shortly!
                   </p>
                   <button
                     onClick={() => setContactSubmitted(false)}
-                    className="mt-4 px-6 py-2.5 rounded-full bg-slate-800 text-xs text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
+                    className="mt-4 px-6 py-2.5 rounded-full bg-slate-100 text-xs text-slate-700 hover:bg-slate-200 transition-colors"
                   >
                     Send Another Message
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleContactSubmit} className="space-y-4">
-                  <h3 className="text-xl font-normal text-white mb-2">Send Us a Message</h3>
+                  <h3 className="text-xl font-normal text-slate-900 mb-2">Send Us a Message</h3>
                   
                   <div>
-                    <label className="block text-xs font-light text-slate-300 mb-1">Your Name</label>
+                    <label className="block text-xs font-medium text-slate-700 mb-1">Your Name</label>
                     <input
                       type="text"
                       required
                       value={contactName}
                       onChange={(e) => setContactName(e.target.value)}
                       placeholder="e.g. Alex Morgan"
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-light text-slate-300 mb-1">Your Email</label>
+                    <label className="block text-xs font-medium text-slate-700 mb-1">Your Email</label>
                     <input
                       type="email"
                       required
                       value={contactEmail}
                       onChange={(e) => setContactEmail(e.target.value)}
                       placeholder="alex@example.com"
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-light text-slate-300 mb-1">Subject</label>
+                    <label className="block text-xs font-medium text-slate-700 mb-1">Subject</label>
                     <input
                       type="text"
                       value={contactSubject}
                       onChange={(e) => setContactSubject(e.target.value)}
                       placeholder="e.g. Inquiry about Peer Mentorship"
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-light text-slate-300 mb-1">Message</label>
+                    <label className="block text-xs font-medium text-slate-700 mb-1">Message</label>
                     <textarea
                       required
                       rows={4}
                       value={contactMessage}
                       onChange={(e) => setContactMessage(e.target.value)}
                       placeholder="Type your message here..."
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={contactSubmitting}
-                    className="w-full py-3 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-normal text-sm transition-colors shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="w-full py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-normal text-sm transition-colors shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
                   >
                     {contactSubmitting ? (
                       "Sending..."
